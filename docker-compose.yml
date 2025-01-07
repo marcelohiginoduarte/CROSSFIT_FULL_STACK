@@ -1,0 +1,37 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./crossfit_box
+    container_name: django-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      -  ./crossfit_box:/app
+    environment:
+      - DEBUG=True
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./crossfit-box-frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./crossfit-box-frontend:/app
+    environment:
+      - NODE_ENV=development
+
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
