@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import './Membros.css';
 import axios from 'axios';
+import { getCLS, getFID, getLCP } from 'web-vitals';
 
 const Membros = () => {
     const [membros, setMembros] = useState([]);
@@ -16,7 +18,7 @@ const Membros = () => {
 
     return (
         <div>
-            <h1>Membros</h1>
+            <h1>Cadastro de Mebros</h1>
             <ul>
                 {membros.map(membro => (
                     <li key={membro.id}>{membro.nome}</li>
